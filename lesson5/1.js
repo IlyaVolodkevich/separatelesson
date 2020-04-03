@@ -1,9 +1,9 @@
 'use strict';
-
+let amount = 0;
 let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n)
 };
-
+let expenses = [];
 let money; 
 //+prompt('Ваш месячный доход?','');
 let income = 2;
@@ -26,31 +26,22 @@ while(!isNumber(money));
 
 start();
 
-let expenses1, expenses2;
-
 
 let getExpensesMonth = function() {
-let sum = 0;
+    
 
 for (let i = 0; i < 2; i++) {
+    let sum;
+    expenses[i] = prompt('Введите обязательную статью расходов?','Садик государственный');
 
-if (i === 0) {
-
-    expenses1 = prompt('Введите обязательную статью расходов?','Садик государственный');
-} else if (i === 1) {
-    expenses2 = prompt('Введите обязательную статью расходов?','Садик частный');
+    do { 
+    sum = prompt('Во сколько это обойдется?','');
+ }
+   while(!isNumber(sum));
+   amount += +sum;
 }
-
-    sum += +prompt('Во сколько это обойдется?','');
-   
-    if (!isNumber(sum)) {
-        console.log('Данные не являются числом');
-    }  else {
-        console.log('Данные являются числом');
-    }   
-}
-console.log(sum);
-return sum;
+console.log(amount);
+return amount;
 }
 
 let expensesAmount = getExpensesMonth();
@@ -65,7 +56,7 @@ let AccumulatedMonth = getAccumulatedMonth (money, expensesAmount);
 console.log (AccumulatedMonth);
 
 let getTargetMonth = function() {
-    return mission / AccumulatedMonth;
+    return Math.ceil(mission / AccumulatedMonth);
     
 }
 let TargetMonth = getTargetMonth ();
